@@ -1,0 +1,85 @@
+= i2ccl Container
+Jordan Williams <jordan@jwillikers.com>
+:experimental:
+:icons: font
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+:Buildah: https://buildah.io/[Buildah]
+:fish: https://fishshell.com/[fish]
+:Git: https://git-scm.com/[Git]
+:i2cdriver: https://i2cdriver.readthedocs.io/en/latest/[i2cdriver]
+:Podman: https://podman.io/[Podman]
+
+A {Buildah} script for creating a container image to run the `i2ccl` command-line program from {i2cdriver}.
+
+== Getting Started
+
+The instructions below can be used on Fedora to create the image and run it locally.
+
+. Install {Buildah}, {fish}, {Git}, and {Podman}.
++
+[source,sh]
+----
+➜ sudo dnf -y install buildah fish git podman
+----
+
+. Clone this repository.
++
+[source,sh]
+----
+➜ git clone https://github.com/jwillikers/i2ccl-container.git
+----
+
+. Execute the script to create the container image locally.
++
+[source,sh]
+----
+➜ fish i2ccl-container/i2ccl.fish
+----
+
+. Now, run the i2ccl command in the i2ccl container.
+Make sure to pass in the target device to Podman. 
++
+[source,sh]
+----
+➜ podman run --rm --group-add keep-groups --security-opt label=disable --device=/dev/ttyUSB0 -it localhost/i2ccl i2ccl /dev/ttyUSB0 i
+uptime 1721  5.000 V  0 mA  23.6 C SDA=1 SCL=1 speed=100 kHz
+----
+
+== Contributing
+
+Contributions in the form of issues, feedback, and even pull requests are welcome.
+Make sure to adhere to the project's link:CODE_OF_CONDUCT.adoc[Code of Conduct].
+
+== Open Source Software
+
+This project is built on the hard work of countless open source contributors.
+Several of these projects are enumerated below.
+
+* https://asciidoctor.org/[Asciidoctor]
+* {Buildah}
+* https://getfedora.org/[Fedora]
+* {fish}
+* {Git}
+* {i2cdriver}
+* https://www.linuxfoundation.org/[Linux]
+* {Podman}
+
+== Code of Conduct
+
+The project's Code of Conduct is available in the link:CODE_OF_CONDUCT.adoc[Code of Conduct] file.
+
+== License
+
+This repository is licensed under the https://www.gnu.org/licenses/gpl-3.0.html[GPLv3], available in the link:LICENSE.adoc[license file].
+
+© 2021 Jordan Williams
+
+== Authors
+
+mailto:{email}[{author}]
